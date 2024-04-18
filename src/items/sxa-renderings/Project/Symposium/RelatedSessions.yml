@@ -1,0 +1,20 @@
+﻿---
+ID: "05a814af-5ff8-4b44-8060-a5e5f5801302"
+Parent: "1092d15f-18be-4e4e-9de0-e808806df7c7"
+Template: "04646a89-996f-4ee7-878a-ffdbf1f0ef0d"
+Path: /sitecore/layout/Renderings/Project/Symposium/RelatedSessions
+SharedFields:
+- ID: "037fe404-dd19-4bf7-8e30-4dadf68b27b0"
+  Hint: componentName
+  Value: RelatedSessions
+- ID: "06d5295c-ed2f-4a54-9bf2-26228d113318"
+  Hint: __Icon
+  Value: Office/32x32/astrologer.png
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "a83abf67-86a0-44a7-86ab-6d41866c816c"

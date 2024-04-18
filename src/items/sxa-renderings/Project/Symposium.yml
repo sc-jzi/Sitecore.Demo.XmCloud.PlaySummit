@@ -1,0 +1,13 @@
+﻿---
+ID: "1092d15f-18be-4e4e-9de0-e808806df7c7"
+Parent: "1995806f-0a84-42b5-93b0-88f0e2ff872c"
+Template: "7ee0975b-0698-493e-b3a2-0b2ef33d0522"
+Path: /sitecore/layout/Renderings/Project/Symposium
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "8cdc337e-a112-42fb-bbb4-4143751e123f"
+      Hint: __Revision
+      Value: "f922cf71-cd5c-481c-a67e-3956af779588"
