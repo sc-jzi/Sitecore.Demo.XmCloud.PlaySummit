@@ -1,0 +1,10 @@
+[functions]
+  included_files = [
+  "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/server-inserted-html*",
+  "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/hooks-client-context*",
+  "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/image-config-context*",  
+  "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/app-router-context*",
+  "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/router-context*",
+  "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/amp-context*",
+  "node_modules/next/dist/server/future/route-modules/pages/vendored/contexts/head-manager-context*",
+]
