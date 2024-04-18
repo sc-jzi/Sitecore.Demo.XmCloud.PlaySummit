@@ -57,6 +57,7 @@ const RelatedSessions = (props: MyComponentProps): JSX.Element => {
 
   console.log("is response ready? " + responseReady);
   console.log("pageState? " + pageState);
+  console.log("engage loadeed? " + engageLoaded);
 
   if (
     (pageState === 'normal' && responseReady)
