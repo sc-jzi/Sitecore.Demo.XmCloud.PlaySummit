@@ -114,7 +114,7 @@ type GuestProfileResponse = GuestProfile | undefined;
 
 // ***** API *****
 
-const POINT_OF_SALE = 'PLAY! Summit';
+const POINT_OF_SALE = process.env.NEXT_PUBLIC_CDP_POINTOFSALE || 'playwebsite';
 const CURRENCY = 'USD';
 
 const CDP_CLIENT_KEY = process.env.NEXT_PUBLIC_CUSTOM_CDP_CLIENT_KEY || '';

@@ -1,6 +1,6 @@
 import { engage } from 'components/Symposium/PageViewCdp';
 
-const POS = 'playwebsite';
+const POS = process.env.NEXT_PUBLIC_CDP_POINTOFSALE || 'playwebsite';
 const channel = 'WEB';
 const currency = 'USD';
 
