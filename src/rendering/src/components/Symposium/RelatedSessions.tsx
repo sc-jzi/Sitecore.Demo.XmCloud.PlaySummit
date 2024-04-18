@@ -42,6 +42,9 @@ const RelatedSessions = (props: MyComponentProps): JSX.Element => {
       try {
         const response = await getVariant(friendlyId);
         setSessions(response);
+ 
+        console.log("response: " + sessions.sessions.data.sessions.results);
+
         setResponseReady(true);
       } catch (error) {
       }
@@ -52,13 +55,16 @@ const RelatedSessions = (props: MyComponentProps): JSX.Element => {
     }
   }, [engageLoaded, friendlyId, pageState]);
 
+  console.log("is response ready? " + responseReady);
+  console.log("pageState? " + pageState);
+
   if (
     (pageState === 'normal' && responseReady)
   ) {
     return (
       <div className="w-full">
         <h2 className="font-bold text-5xl w-1/3 text-blue-light" style={{ margin: '0 auto' }}>Personalized Sessions</h2>
-
+  
         <div className="columns-3 text-center w-1/2" style={{ margin: '0 auto' }}>
           {sessions.sessions.data.sessions.results.map((item, index) => (
             <div className="session" key={index}>
