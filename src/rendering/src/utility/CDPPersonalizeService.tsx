@@ -120,6 +120,7 @@ type sponsor = {
 }
 
 export async function getVariant(friendlyId: string) {
+    console.log("in getVariant. friendlyId: " + friendlyId)
     const personalizationData = {
         channel,
         currency,
@@ -128,6 +129,8 @@ export async function getVariant(friendlyId: string) {
     };
 
     const response = (await engage.personalize(personalizationData)) as sessionDataResponse;
+
+    console.log("got some kind of response, I think");
 
     return response;
 }
