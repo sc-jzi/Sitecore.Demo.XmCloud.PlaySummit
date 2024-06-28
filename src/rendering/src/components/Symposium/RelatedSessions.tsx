@@ -31,6 +31,10 @@ const RelatedSessions = (): JSX.Element => {
         engage 
         // && pageState === 'normal'
       ) {
+        console.log("guest guest guest");
+
+        console.log(engage.getGuestId);
+        console.log("guest guest guest");
         setEngageLoaded(true);
         clearInterval(engageLoadededInterval);
       }

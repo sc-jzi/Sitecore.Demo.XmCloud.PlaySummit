@@ -23,15 +23,13 @@ import {
      * Creates a page view event using the Sitecore Engage SDK.
      */
     const createPageView = async (page: string, language: string, pageVariantId: string) => {
-      const pointOfSale = "playwebsite";
-  
-      console.log('loading engage : ', process.env.NEXT_PUBLIC_CDP_CLIENT_KEY);
+      const pointOfSale = process.env.NEXT_PUBLIC_CDP_POS;
   
       const startTime = Date.now();
   
       engage = await init({
-        clientKey: '9f46c27c71691685ad1d5419b225529b',
-        targetURL: 'https://api-engage-us.sitecorecloud.io',
+        clientKey: process.env.NEXT_PUBLIC_CDP_CLIENT_KEY,
+        targetURL: process.env.NEXT_PUBLIC_CDP_TARGET,
         // Replace with the top level cookie domain of the website that is being integrated e.g ".example.com" and not "www.example.com"
         //cookieDomain: window.location.host.replace(/^www\./, ''),
         // Cookie may be created in personalize middleware (server), but if not we should create it here

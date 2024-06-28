@@ -113,6 +113,7 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
       if (!!audience) {
         // Log the 'AUDIENCE_PREFERENCE' custom event to CDP using the Cloud SDK
         try {
+          console.log("audience: " + audience);
           await logAudiencePreferenceEventCloudSDK(audience);
         } catch (e) {
           console.error(e);
@@ -162,7 +163,7 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
       {showResults && (
         <div className="questionnaire-recommendations">
           <div className="questionnaire-recommendations-header">
-            <Text tag="h3" field={datasource?.title.jsonValue} />
+            ##<Text tag="h3" field={datasource?.title.jsonValue} /> {selectedAudience}##
             <button
               className="btn-secondary btn-secondary-light"
               onClick={() => restartQuestionnaire()}

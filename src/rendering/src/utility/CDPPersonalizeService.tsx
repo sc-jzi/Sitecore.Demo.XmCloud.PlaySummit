@@ -1,6 +1,6 @@
 import { engage } from 'components/Symposium/PageViewCdp';
 
-const POS = process.env.NEXT_PUBLIC_CDP_POINTOFSALE || 'playwebsite';
+const POS = process.env.NEXT_PUBLIC_CDP_POS || 'playwebsite';
 const channel = 'WEB';
 const currency = 'USD';
 
@@ -120,7 +120,6 @@ type sponsor = {
 }
 
 export async function getVariant(friendlyId: string) {
-    console.log("in getVariant. friendlyId: " + friendlyId)
     const personalizationData = {
         channel,
         currency,
@@ -129,8 +128,6 @@ export async function getVariant(friendlyId: string) {
     };
 
     const response = (await engage.personalize(personalizationData)) as sessionDataResponse;
-
-    console.log("got some kind of response, I think");
 
     return response;
 }
