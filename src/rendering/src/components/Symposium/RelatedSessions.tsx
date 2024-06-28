@@ -62,7 +62,7 @@ const RelatedSessions = (props: MyComponentProps): JSX.Element => {
       ) {
       fetchData();
     }
-  }, [engageLoaded, friendlyId, pageStategit]);
+  }, [engageLoaded, friendlyId, pageState]);
 
   console.log("is response ready? " + responseReady);
   console.log("pageState? " + pageState);
