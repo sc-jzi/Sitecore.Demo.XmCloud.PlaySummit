@@ -27,7 +27,12 @@ const RelatedSessions = (props: MyComponentProps): JSX.Element => {
 
   useEffect(() => {
     const engageLoadededInterval = setInterval(() => {
-      if (engage && pageState === 'normal') {
+      if (
+        engage //&& 
+      //  pageState === 'normal'
+      ) {
+        console.log ("checking engage");
+
         setEngageLoaded(true);
         clearInterval(engageLoadededInterval);
       }
@@ -40,27 +45,34 @@ const RelatedSessions = (props: MyComponentProps): JSX.Element => {
   useEffect(() => {
     async function fetchData() {
       try {
+        console.log ("running fetchdata");
         const response = await getVariant(friendlyId);
         setSessions(response);
  
-        console.log("response: " + sessions.sessions.data.sessions.results);
+        console.log("response: " + sessions.sessions.data.sessions.results.length);
 
         setResponseReady(true);
       } catch (error) {
       }
     }
 
-    if (engageLoaded && pageState === 'normal') {
+    if (
+      engageLoaded// && 
+      //pageState === 'normal'
+      ) {
       fetchData();
     }
-  }, [engageLoaded, friendlyId, pageState]);
+  }, [engageLoaded, friendlyId, pageStategit]);
 
   console.log("is response ready? " + responseReady);
   console.log("pageState? " + pageState);
   console.log("engage loadeed? " + engageLoaded);
 
   if (
-    (pageState === 'normal' && responseReady)
+    (
+    //  pageState === 'normal' && 
+      responseReady
+    )
   ) {
     return (
       <div className="w-full">
