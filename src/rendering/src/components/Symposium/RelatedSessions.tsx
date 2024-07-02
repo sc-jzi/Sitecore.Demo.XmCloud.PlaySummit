@@ -31,10 +31,6 @@ const RelatedSessions = (): JSX.Element => {
         engage 
         // && pageState === 'normal'
       ) {
-        console.log("guest guest guest");
-
-        console.log(engage.getGuestId);
-        console.log("guest guest guest");
         setEngageLoaded(true);
         clearInterval(engageLoadededInterval);
       }
@@ -84,21 +80,23 @@ const RelatedSessions = (): JSX.Element => {
     responseReady
     ) {
     return (
-      <div className="w-full">
-        <h2 className="font-bold text-5xl w-1/3 text-blue-light" style={{ margin: '0 auto' }}>Personalized Sessions</h2>
-  
-        <div className="columns-3 text-center w-1/2" style={{ margin: '0 auto' }}>
-          {sessions.sessions.data.sessions.results.map((item, index) => (
-            <div className="session" key={index}>
-              <Link href={item.url.path}>
-                <h2>{item.pageTitle.value}</h2>
-                <img src={item.image.jsonValue.value.src} alt={item.image.jsonValue.value.alt} />
-                <div dangerouslySetInnerHTML={{ __html: item.description.value }} className="truncate"></div>
-              </Link>
-            </div>
-          ))}
+      <>
+        {console.log(sessions)}
+        <div className="w-full">
+          <h2 className="font-bold text-5xl w-1/3 text-blue-light" style={{ margin: '0 auto' }}>Personalized Sessions</h2>
+          <div className="columns-3 text-center w-1/2" style={{ margin: '0 auto' }}>
+            {sessions.sessions.data.sessions.results.map((item, index) => (
+              <div className="session" key={index}>
+                <Link href={item.url.path}>
+                  <h2>{item.pageTitle.value}</h2>
+                  <img src={item.image.jsonValue.value.src} alt={item.image.jsonValue.value.alt} />
+                  <div dangerouslySetInnerHTML={{ __html: item.description.value }} className="truncate"></div>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </>
     );
   } else {
     return (
