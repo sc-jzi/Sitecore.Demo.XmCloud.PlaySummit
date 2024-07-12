@@ -1,3 +1,12 @@
+.sessionwrapper {
+  p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+}
+
 .item-grid.sessions-grid {
   @apply basis-full max-w-screen-2xl mx-auto box-border overflow-hidden;
 

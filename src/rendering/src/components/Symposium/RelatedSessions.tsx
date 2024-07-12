@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
-  // ComponentParams,
-  // ComponentRendering,
   useSitecoreContext,
 } from '@sitecore-jss/sitecore-jss-nextjs';
 import { sessionDataResponse, getVariant } from 'src/utility/CDPPersonalizeService';
 import { engage } from './PageViewCdp';
 
-// interface MyComponentProps {
-//   rendering: ComponentRendering & { params: ComponentParams };
-//   params: ComponentParams;
-// }
-
 const RelatedSessions = (): JSX.Element => {
   const {
     sitecoreContext: { pageState },
   } = useSitecoreContext();
-
-  //console.log(props);
 
   const [sessions, setSessions] = useState<sessionDataResponse>();
   const [engageLoaded, setEngageLoaded] = useState<boolean>(false);
@@ -43,20 +34,10 @@ const RelatedSessions = (): JSX.Element => {
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log("starting fetchData");
-        console.log("getting response");
         const response = await getVariant(friendlyId);
-        console.log("setting sessions");
-
         setSessions(response);
- 
-        console.log("sessions set. setting responseReady to true");
-
         setResponseReady(true);
-        console.log("fetchData done");
-
       } catch (error) {
-        console.log("zomg an error");
         console.log (error);
       }
     }
@@ -65,15 +46,9 @@ const RelatedSessions = (): JSX.Element => {
       engageLoaded
       // && pageState === 'normal'
     ) {
-      console.log("calling fetchData");
       fetchData();
-      console.log("done calling fetchData");
     }
   }, [engageLoaded, friendlyId, pageState]);
-
-  console.log("is response ready? " + responseReady);
-  console.log("pageState? " + pageState);
-  console.log("engage loadeed? " + engageLoaded);
 
   if (
     //pageState === 'normal' &&
@@ -81,16 +56,15 @@ const RelatedSessions = (): JSX.Element => {
     ) {
     return (
       <>
-        {console.log(sessions)}
         <div className="w-full">
-          <h2 className="font-bold text-5xl w-1/3 text-blue-light" style={{ margin: '0 auto' }}>Personalized Sessions</h2>
+          <h2 className="font-bold text-5xl w-1/2 text-blue-light" style={{ margin: '0 auto' }}>Personalized Sessions</h2>
           <div className="columns-3 text-center w-1/2" style={{ margin: '0 auto' }}>
             {sessions.sessions.data.sessions.results.map((item, index) => (
               <div className="session" key={index}>
                 <Link href={item.url.path}>
                   <h2>{item.pageTitle.value}</h2>
                   <img src={item.image.jsonValue.value.src} alt={item.image.jsonValue.value.alt} />
-                  <div dangerouslySetInnerHTML={{ __html: item.description.value }} className="truncate"></div>
+                  <div dangerouslySetInnerHTML={{ __html: item.description.value }} className="sessionwrapper"></div>
                 </Link>
               </div>
             ))}
@@ -101,7 +75,7 @@ const RelatedSessions = (): JSX.Element => {
   } else {
     return (
       <div className="w-full">
-        <h2 className="font-bold text-5xl w-1/3 text-blue-light" style={{ margin: '0 auto' }}>Personalized Sessions</h2>
+        <h2 className="font-bold text-5xl w-1/2 text-blue-light" style={{ margin: '0 auto' }}>Personalized Sessions</h2>
 
         <div className="columns-3 text-center w-1/2" style={{ margin: '0 auto' }}>
           <div className="session">
