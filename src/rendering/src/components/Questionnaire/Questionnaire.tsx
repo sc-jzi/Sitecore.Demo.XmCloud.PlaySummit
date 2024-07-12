@@ -4,6 +4,7 @@ import {
   withDatasourceCheck,
   RichTextField,
   ImageField,
+  useSitecoreContext,
 } from '@sitecore-jss/sitecore-jss-nextjs';
 import { ComponentProps } from 'lib/component-props';
 import { QuestionnaireQuestion } from './QuestionnaireQuestion';
@@ -12,6 +13,7 @@ import { logAudiencePreferenceEvent } from 'src/services/CdpService';
 import { logAudiencePreferenceEvent as logAudiencePreferenceEventCloudSDK } from 'src/services/CloudSDKService';
 import { GraphQLSession } from 'src/types/session';
 import SessionItem from 'components/Sessions/SessionItem';
+import { engage } from '../Symposium/PageViewCdp';
 
 type QuestionnaireProps = ComponentProps & {
   fields: {
@@ -67,6 +69,7 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
   const [selectedAudience, setSelectedAudience] = useState('');
   const [selectedSessionType, setSelectedSessionType] = useState('');
   const [sessionResults, setSessionResults] = useState<extendedGraphQLSession[]>([]);
+  const [engageLoaded, setEngageLoaded] = useState<boolean>(false);
 
   const datasource = useMemo(
     () => props.fields?.data?.datasource,
@@ -77,6 +80,25 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
     () => props.fields?.data?.sessions?.children?.results,
     [props.fields?.data?.sessions?.children?.results]
   );
+
+  const {
+    sitecoreContext: { pageState },
+  } = useSitecoreContext();
+
+  useEffect(() => {
+    const engageLoadededInterval = setInterval(() => {
+      if (
+        engage 
+        // && pageState === 'normal'
+      ) {
+        setEngageLoaded(true);
+        clearInterval(engageLoadededInterval);
+      }
+    }, 100);
+    return () => {
+      clearInterval(engageLoadededInterval);
+    };
+  }, [pageState]);
 
   // This is temporary and will not be needed after Search implementation
   useEffect(() => {
@@ -113,8 +135,26 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
       if (!!audience) {
         // Log the 'AUDIENCE_PREFERENCE' custom event to CDP using the Cloud SDK
         try {
-          console.log("audience: " + audience);
           await logAudiencePreferenceEventCloudSDK(audience);
+
+          // Also log the AUDIENCE_PREFERENCE custom event to CDP using the Engage SDK, as that's what's being used in the personalization custom component. 
+          if (engageLoaded)
+          {
+            const eventData = {
+              channel: "WEB",
+              currency: "USD",
+              pointOfSale: "playwebsite",
+              language: "EN",
+              page: "session-finder", // hardcoding page as this is the only page this event can run on anyway
+              
+            };
+
+            const extensionData = {
+              audience: audience
+            };
+
+            await engage.event("AUDIENCE_PREFERENCE", eventData, extensionData);
+          }
         } catch (e) {
           console.error(e);
         }
@@ -139,7 +179,7 @@ const Questionnaire = (props: QuestionnaireProps): JSX.Element => {
         }, 700);
       }
     },
-    [currQuestionIndex, questions?.length]
+    [currQuestionIndex, questions?.length, engageLoaded]
   );
 
   const restartQuestionnaire = useCallback(() => {
